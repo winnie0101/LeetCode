@@ -6,25 +6,40 @@ class ListNode:
         self.val = val
         self.next = next
 
+# Recursive
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return None
 
-        prev, curr = None, head
+        newHead = head
+        if head.next:
+            newHead = self.reverseList(head.next)
+            head.next.next = head
+        head.next = None
 
-        # 將所有link反轉
-        while curr:
-            next_head = curr.next
-            curr.next = prev
-            prev = curr
-            curr = next_head
+        return newHead
 
-        return prev
+# Iteration
+# class Solution:
+#     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
 
-    def printList(self, head: Optional[ListNode]) -> None:
-        while head:
-            print(head.val, end=' ')
-            head = head.next
-        print()
+#         prev, curr = None, head
+
+#         # 將所有link反轉
+#         while curr:
+#             next_head = curr.next
+#             curr.next = prev
+#             prev = curr
+#             curr = next_head
+
+#         return prev
+
+#     def printList(self, head: Optional[ListNode]) -> None:
+#         while head:
+#             print(head.val, end=' ')
+#             head = head.next
+#         print()
 
 head = ListNode(1)
 head.next = ListNode(2)
